@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.NewBookingPage"
+             Style="{StaticResource Background}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="BtnAddBooking" Command="{Binding AddCommand}" Text="Save" Clicked="BtnAddBooking_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.BindingContext>
+        <vm:BookingViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+
+            </Grid.ColumnDefinitions>
+
+            <FlexLayout BackgroundColor="Black" Grid.Row="0">
+                <Label TextColor="white">New Booking</Label>
+            </FlexLayout>
+
+            <TableView RowHeight="35" HasUnevenRows="True" Grid.Row="1">
+                <TableRoot>
+                    <TableSection Title="Client">
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="Name:"></Label>
+                                <Entry Text="{Binding NewClientName}"></Entry>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="Phone:"></Label>
+                                <Entry Text="{Binding NewClientPhone}"></Entry>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="Email:"></Label>
+                                <Entry Text="{Binding NewClientEmail}"></Entry>
+                            </StackLayout>
+                        </ViewCell>
+                        <SwitchCell On="{Binding NewClientCorporate}" Text="Corporate?"></SwitchCell>
+                    </TableSection>
+                    <TableSection Title="Project">
+                        <ViewCell>
+                            <FlexLayout>
+                                <Label Margin="15" Text="Booking date:"></Label>
+                                <!--default date today-->
+                                <DatePicker x:Name="BookingDatePicker" Date="{Binding NewBookingDate}"></DatePicker>
+                            </FlexLayout>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Video">
+                        <ViewCell>
+                            <FlexLayout>
+                                <Label Margin="15" Text="Video type:"></Label>
+                                <Picker x:Name="VideoTypePicker" SelectedItem="{Binding NewVideoType}"></Picker>
+                            </FlexLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <FlexLayout>
+                                <Label Margin="15" Text="Filming date:"></Label>
+                                <DatePicker x:Name="FilmingDatePicker" Date="{Binding NewFilmingDate}"></DatePicker>
+                            </FlexLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Margin="15" Text="Comment:"></Label>
+                                <Editor Text="{Binding NewComment}" Margin="15,0,15,0" WidthRequest="250"></Editor>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Payment">
+                        <SwitchCell On="{Binding NewPaid}" Text="Paid?"></SwitchCell>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Margin="15" Text="Deposit:"></Label>
+                                <Entry Text="{Binding NewDeposit}" WidthRequest="100"></Entry>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

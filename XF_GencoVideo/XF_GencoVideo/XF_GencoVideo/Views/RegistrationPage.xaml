@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.RegistrationPage"
+             Shell.PresentationMode="ModalAnimated"
+             Style="{StaticResource Background}">
+
+    <ContentPage.BindingContext>
+        <vm:RegistrationViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry
+                    x:Name="NicknameEntry"
+                    Text="{Binding Nickname}"
+                Placeholder="NickName"
+                    >
+            </Entry>
+            <Entry  x:Name="EmailEntry"
+                    Text="{Binding Email}"
+                Placeholder="Email">
+
+            </Entry>
+            <Entry  x:Name="PasswordEntry"
+                    Text="{Binding Password}"
+                Placeholder="Password"
+                    IsPassword="True">
+
+            </Entry>
+            <Entry  x:Name="ConfirmPasswordEntry"
+                    Text="{Binding ConfirmPassword}"
+                Placeholder="Confirm password"
+                    IsPassword="True">
+                
+            </Entry>
+            <Button 
+                x:Name="BtnRegister"
+                Text="Register"
+                Command="{Binding RegisterCommand}"
+                    >                
+            </Button>
+            <!--<Label Text="Cancel"
+                   x:Name="LblCancelRegistration"
+                   >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Label.GestureRecognizers>
+            </Label>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

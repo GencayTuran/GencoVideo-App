@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             x:Class="XF_GencoVideo.Views.OfferPage"
+             Style="{StaticResource Background}">
+
+    <ContentPage.BindingContext>
+        <vm:OfferViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Entry
+                    x:Name="InputField"
+                    Text="{Binding NewOffer}"
+                    ReturnCommand="{Binding AddOfferCommand}"
+                    >
+
+            </Entry>
+
+            <ListView x:Name="OfferList" ItemsSource="{Binding Offers}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" Padding="20,0">
+
+                                <ContentView>
+                                    <FlexLayout AlignItems="Center">
+                                        <input:CheckBox Margin="0,0,10,0" IsChecked="{Binding ModelLinkmoethierkomen}"/>
+
+                                        <Label Style="{StaticResource Labels}" Text="{Binding VideoType}"></Label>
+                                    </FlexLayout>
+                                </ContentView>
+                                
+                           
+                                <ImageButton 
+                                    Source="delete.png"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Path=BindingContext.RemoveOfferCommand, Source={x:Reference OfferList}}"
+                                    CommandParameter="{Binding .}">
+
+                                </ImageButton>
+                            </FlexLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

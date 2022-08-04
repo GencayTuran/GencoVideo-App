@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.NewVideoPage">
+        
+        <ContentPage.ToolbarItems>
+            <ToolbarItem x:Name="BtnAddVideo" Command="{Binding AddCommand}" Text="Save" Clicked="BtnAddVideo_Clicked"/>
+        </ContentPage.ToolbarItems>
+
+        <!--<ContentPage.BindingContext>
+            <vm:VideoViewModel/>
+        </ContentPage.BindingContext>-->
+        
+    <ContentPage.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+
+                </Grid.ColumnDefinitions>
+
+                <FlexLayout BackgroundColor="Black" Grid.Row="0">
+                    <Label TextColor="white">New Video</Label>
+                </FlexLayout>
+
+                <TableView RowHeight="35" HasUnevenRows="True" Grid.Row="1">
+                    <TableRoot>
+                    <TableSection Title="Adding a new video">
+                        <ViewCell>
+                            <StackLayout Padding="15,0,15,0">
+                                <Entry Placeholder="Paste Youtube Url Here" Text="{Binding NewVideoUrl}"></Entry>
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="SpaceBetween" Padding="0,0,15,0">
+                                <Label Margin="15" Text="Video type:"></Label>
+                                    
+                                <Picker WidthRequest="250" x:Name="VideoTypePicker" ItemsSource="{Binding VideoTypes}" SelectedItem="{Binding NewVideoType}"></Picker>
+                            </FlexLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="SpaceBetween" Padding="0,0,15,0">
+                                <Label Margin="15" Text="Client:"></Label>
+                                <Picker WidthRequest="250" x:Name="ClientPicker" ItemsSource="{Binding Clients}" SelectedItem="{Binding ClientName}"></Picker>
+                            </FlexLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="SpaceBetween" Padding="0,0,15,0">
+                                <Label Margin="15" Text="Client:"></Label>
+                                <Entry  WidthRequest="250" Text="{Binding NewLocation}"></Entry>
+                            </FlexLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout>
+                                <Editor AutoSize="TextChanges" VerticalOptions="StartAndExpand" Placeholder="Description" Text="{Binding NewDescription}" Margin="15,0,15,0"></Editor>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+                </TableView>
+
+
+            </Grid>
+        </ContentPage.Content>
+</ContentPage>

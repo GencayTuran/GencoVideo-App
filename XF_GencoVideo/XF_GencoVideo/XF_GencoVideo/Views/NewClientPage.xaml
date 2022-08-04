@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.NewClientPage"
+             Style="{StaticResource Background}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="BtnAddClient" Command="{Binding AddCommand}" Text="Save" Clicked="BtnAddClient_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.BindingContext>
+        <vm:ClientViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+                <Entry
+                    Text="{Binding NewClientName}"
+                Placeholder="Name"
+                    >
+                </Entry>
+                <Entry
+                    Text="{Binding NewClientEmail}"
+                Placeholder="Email">
+
+                </Entry>
+                <Entry
+                    Text="{Binding NewClientPhone}"
+                Placeholder="Phone">
+
+                </Entry>
+            <FlexLayout Margin="3,0,0,0" JustifyContent="SpaceBetween">
+            <Label FontSize="Medium" Text="Corporate?"/>
+                <Switch IsToggled="{Binding NewClientCorporate}"></Switch>
+            </FlexLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:XF_GencoVideo.Views"
+       Title="XF_GencoVideo"
+       x:Class="XF_GencoVideo.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <!--<ToolbarItem Text="test" IconImageSource="Logo_GencoVideo.jpg" >
+        
+    </ToolbarItem>-->
+   
+    <ShellItem Route="login">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </ShellItem>
+
+    <TabBar Shell.TabBarBackgroundColor="Black"
+            Shell.TabBarTitleColor="White"
+            Route="main">
+
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}"/>
+        </Tab>
+        <Tab Title="Calendar" Icon="calendar.png">
+            <ShellContent ContentTemplate="{DataTemplate local:CalendarPage}"/>
+        </Tab>
+        <Tab Title="Bookings" Icon="bookingtag.png">
+            <ShellContent  ContentTemplate="{DataTemplate local:BookingPage}"/>
+        </Tab>
+        <Tab Title="Offers" Icon="offer.png">
+            <ShellContent  ContentTemplate="{DataTemplate local:OfferPage}"/>
+        </Tab>
+        <Tab Title="Videos" Icon="video_take.png">
+            <ShellContent Route="videos"  ContentTemplate="{DataTemplate local:VideoPage}"/>
+        </Tab>
+        <Tab Title="Clients" Icon="client.png">
+            <ShellContent  ContentTemplate="{DataTemplate local:ClientPage}"/>
+        </Tab>
+        <Tab Title="Reports" Icon="chart.png">
+            <ShellContent  ContentTemplate="{DataTemplate local:ReportsPage}"/>
+        </Tab>
+
+    </TabBar>
+
+
+
+</Shell>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             xmlns:m="clr-namespace:XF_GencoVideo.Models"
+             x:Class="XF_GencoVideo.Views.BookingPage"
+             Style="{StaticResource Background}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="BtnNewBooking" Clicked="BtnNewBooking_Clicked" Text="New Booking"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <vm:BookingViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <FlexLayout BackgroundColor="Black" Grid.Row="0">
+                <Label TextColor="White">Booking table</Label>
+            </FlexLayout>
+            
+            <StackLayout Grid.Row="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="0" Text="Name"></Label>
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="1" Text="Filming date"></Label>
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="2" Text="Type"></Label>
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="3" Text="Status"></Label>
+
+                </Grid>
+                <ListView IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          ItemsSource="{Binding Bookings}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          RefreshControlColor="Red"
+                          SelectionMode="None"
+                          SeparatorVisibility="None"
+                          x:Name="MyBookings">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem
+                                        Command="{Binding Source={x:Reference MyBookings}, Path=BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsDestructive="True"
+                                        Text="Delete"/>
+                                </ViewCell.ContextActions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="0" Text="{Binding ClientName}"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="1" Text="{Binding FilmingDate}"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="2" Text="{Binding VideoType}"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="3" Text="{Binding Paid}"></Label>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

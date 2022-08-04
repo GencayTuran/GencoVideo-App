@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:a="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.HomePage"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             Style="{StaticResource Background}">
+
+    <!--BackgroundColor="{AppThemeBinding Dark= {StaticResource AppBackgroundColor}, Light= {StaticResource BackgroundColorLight}}"-->
+
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding Nickname}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="225"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="240"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <FlexLayout BackgroundColor="Black" Grid.Row="0" Grid.ColumnSpan="2">
+                <Image Margin="5,2,75,2" Source="logo_white.png" ></Image>
+                <ImageButton x:Name="ProfileButton" Clicked="ProfileButton_Clicked" Scale="0.65" Margin="1,2,5,2" BackgroundColor="White" BorderWidth=".5" CornerRadius="19" Source="user.png">
+                </ImageButton>
+            </FlexLayout>
+
+
+
+            <!--<Button Grid.Row="3" Command="{Binding GetVideoCommand}" Text="Get Link"></Button>-->
+
+            <!--UPCOMING PROJECTS-->
+            <Label Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource SmallTitles}">Upcoming projects</Label>
+            <StackLayout Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
+                    <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                    <FlexLayout Grid.Row="0" Grid.ColumnSpan="3" JustifyContent="SpaceEvenly">
+                    <Label Style="{StaticResource Labels}"  Grid.Column="0" Text="Filming on:"></Label>
+                    <Label Style="{StaticResource Labels}"  Grid.Column="1" Text="Client name:"></Label>
+                    <Label Style="{StaticResource Labels}"  Grid.Column="2" Text="Videotype:"></Label>
+                    </FlexLayout>
+                            </Grid>
+                <ListView BackgroundColor="DarkGray"
+                          ItemsSource="{Binding UpcomingProjects}"
+                          IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          RefreshControlColor="Black"
+                          SelectionMode="None"
+                          SeparatorVisibility="None"
+                          x:Name="lstUpcomingProjects">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="0" Text="{Binding FilmingDate }"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="1" Text="{Binding ClientName }"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="2" Text="{Binding VideoType }"></Label>
+                                </Grid>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <!--End UPCOMING PROJECTS-->
+
+            <!--VIDEO-->
+           
+            <Label  Style="{StaticResource SmallTitles}" Grid.Row="3" Grid.ColumnSpan="2" x:Name="LblVideoTitle"></Label>
+            <Frame  Grid.Row="4" Grid.ColumnSpan="2" Margin="10" BackgroundColor="Transparent" >
+                <xct:MediaElement  
+                    x:Name="videoMediaElement"
+                    Aspect="AspectFill"
+                    ShowsPlaybackControls="False" 
+                    KeepScreenOn="True"
+                    AutoPlay="False"
+                    IsLooping="True"
+                    IsVisible="True"
+                    MediaOpened="VideoMediaElement_MediaOpened"
+                    Scale="1.11"
+                    >
+                   
+                </xct:MediaElement>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="VideoElement_Tapped" NumberOfTapsRequired="2"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <ActivityIndicator Grid.Row="4" Grid.ColumnSpan="2"
+                    x:Name="videoActivityIndicator"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    Color="White" IsRunning="True"
+                    BackgroundColor="Transparent"
+                    HeightRequest="250">
+            </ActivityIndicator>
+                
+            <!--End VIDEO-->
+
+
+            <!--ms-appx:///video_sample.mp4-->
+
+
+        </Grid>
+        <!--</ScrollView>
+        </RefreshView>-->
+    </ContentPage.Content>
+</ContentPage>

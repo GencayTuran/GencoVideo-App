@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.ClientPage"
+             Style="{StaticResource Background}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="BtnNewClient" Clicked="BtnNewClient_Clicked" Text="New Client"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <vm:ClientViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <FlexLayout BackgroundColor="Black" Grid.Row="0">
+                <Label TextColor="White">Client table</Label>
+            </FlexLayout>
+
+            <StackLayout Grid.Row="1" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="0" Text="Name"></Label>
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="1" Text="Email"></Label>
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="2" Text="Phone"></Label>
+                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="3" Text="Client type"></Label>
+
+                </Grid>
+                <ListView IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                          ItemsSource="{Binding Clients}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          RefreshControlColor="Red"
+                          SelectionMode="None"
+                          SeparatorVisibility="None"
+                          x:Name="MyClients">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem
+                                        Command="{Binding Source={x:Reference MyClients}, Path=BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsDestructive="True"
+                                        Text="Delete"/>
+                                </ViewCell.ContextActions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="0" Text="{Binding ClientName}"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="1" Text="{Binding ClientEmail}"></Label>
+                                    <Label Style="{StaticResource Labels}" Grid.Row="0" Grid.Column="2" Text="{Binding ClientPhone}"></Label>
+                                    <Label Style="{StaticResource Labels}" x:Name="LblCorporate" Grid.Row="0" Grid.Column="3" Text="{Binding Corporate}" ></Label>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

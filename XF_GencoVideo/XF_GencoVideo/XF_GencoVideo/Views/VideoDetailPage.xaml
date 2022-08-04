@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="XF_GencoVideo.Views.VideoDetailPage"
+                        xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+                 BackgroundColor="LightCoral">
+    <ContentPage.Content>
+        <CollectionView ItemsSource="{Binding Video}" BackgroundColor="red">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"></RowDefinition>
+                                <RowDefinition Height="250"></RowDefinition>
+                                <RowDefinition Height="85"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" BackgroundColor="Wheat" Margin="10,10,10,0">
+                <Label Text="{Binding NameVideo}"></Label>
+            </StackLayout>
+
+                            <Frame Grid.Row="1" Margin="10">
+                                <xct:MediaElement  
+                                x:Name="videoMediaElement"
+                                Aspect="AspectFill"
+                                ShowsPlaybackControls="True" 
+                                KeepScreenOn="True"
+                                AutoPlay="True"
+                                IsLooping="True"
+                                IsVisible="True"
+                                MediaOpened="VideoMediaElement_MediaOpened"
+                                Scale="1.11"
+                                >
+
+                                </xct:MediaElement>
+                            </Frame>
+                            <ActivityIndicator Grid.Row="1"
+                                x:Name="videoActivityIndicator"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                Color="White" IsRunning="True"
+                                BackgroundColor="Transparent"
+                                HeightRequest="250">
+                            </ActivityIndicator>
+
+                            <FlexLayout JustifyContent="SpaceAround" BackgroundColor="Yellow" Margin="10" Grid.Row="2">
+                                <StackLayout>
+                                    <Label>Filmed on</Label>
+                    <Label Text="{Binding FilmingDate}"></Label>
+
+                                </StackLayout>
+                                <StackLayout>
+                                    <Label>Location</Label>
+                    <Label Text="{Binding Location}"></Label>
+
+
+                </StackLayout>
+                                <StackLayout>
+                                    <Label>Type</Label>
+                    <Label Text="{Binding VideoType}"></Label>
+
+
+                </StackLayout>
+                            </FlexLayout>
+            
+                            <StackLayout  Margin="10" Grid.Row="3">
+                                <Label>(Description)</Label>
+
+                            </StackLayout>
+
+        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ContentPage.Content>
+</ContentPage>

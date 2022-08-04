@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:XF_GencoVideo.ViewModels"
+             x:Class="XF_GencoVideo.Views.ProfilePage">
+    <ContentPage.BindingContext>
+        <vm:UserViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <!--insert tableview-->
+        <StackLayout>
+            <Entry x:Name="newPasswordEntry" Text="{Binding Password}" Placeholder="New Password" IsPassword="True"></Entry>
+            <Button x:Name="BtnChangePassword" Text="Change Password" Command="{Binding UpdateCommand}"></Button>
+            <Button x:Name="BtnDeleteAccount" Text="Delete Account" Command="{Binding DeleteCommand}"></Button>
+            <Button x:Name="BtnLogOut" Text="Log out" Command="{Binding LogOutCommand}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
